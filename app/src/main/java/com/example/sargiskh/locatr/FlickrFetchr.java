@@ -32,7 +32,7 @@ public class FlickrFetchr {
             .appendQueryParameter("api_key", API_KEY)
             .appendQueryParameter("format", "json")
             .appendQueryParameter("nojsoncallback", "1")
-            .appendQueryParameter("extras", "url_s")
+            .appendQueryParameter("extras", "url_s,geo")
             .build();
 
     public byte[] getUrlBytes(String urlSpec) throws IOException{
@@ -68,6 +68,7 @@ public class FlickrFetchr {
         String url = buildUrl(FETCH_RECENTS_METHOD, null);
         return downloadGalleryItems(url);
     }
+
     public List<GalleryItem> searchPhotos(String query) {
         String url = buildUrl(SEARCH_METHOD, query);
         return downloadGalleryItems(url);
@@ -131,7 +132,9 @@ public class FlickrFetchr {
                 continue;
             }
             item.setUrl(photoJsonObject.getString("url_s"));
-            item.setOwner(photoJsonObject.getString("owner"));
+            item.setOwner(photoJsonObject.getString("owner")); //TODO
+            item.setLat(photoJsonObject.getDouble("latitude"));
+            item.setLon(photoJsonObject.getDouble("longitude"));
             items.add(item);
         }
     }

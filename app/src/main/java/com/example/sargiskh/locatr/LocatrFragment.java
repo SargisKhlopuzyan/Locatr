@@ -143,7 +143,7 @@ public class LocatrFragment extends SupportMapFragment {
         mMap.clear();
         mMap.addMarker(itemMarker);
         mMap.addMarker(myMarker);
-        
+
         LatLngBounds bounds = new LatLngBounds.Builder()
                 .include(itemPoint)
                 .include(myPoint)
